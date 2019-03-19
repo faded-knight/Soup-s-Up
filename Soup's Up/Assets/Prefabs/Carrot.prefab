@@ -12,6 +12,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot
       objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196718906, guid: b71d654e4da96480ab3e389bdaaf71fc,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 257134eb53c29c543aa9b623f59d70e6, type: 3}
+    - target: {fileID: 3408920558196718907, guid: b71d654e4da96480ab3e389bdaaf71fc,
+        type: 3}
+      propertyPath: Ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: 57915cee21e3b43c1bad1e1e145842b7,
+        type: 2}
     - target: {fileID: 3408920558196719046, guid: b71d654e4da96480ab3e389bdaaf71fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,12 +78,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3408920558196718907, guid: b71d654e4da96480ab3e389bdaaf71fc,
+    - target: {fileID: 3408920558196719046, guid: b71d654e4da96480ab3e389bdaaf71fc,
         type: 3}
-      propertyPath: Ingredient
+      propertyPath: m_LocalScale.x
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719046, guid: b71d654e4da96480ab3e389bdaaf71fc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719046, guid: b71d654e4da96480ab3e389bdaaf71fc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719044, guid: b71d654e4da96480ab3e389bdaaf71fc,
+        type: 3}
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 11400000, guid: 57915cee21e3b43c1bad1e1e145842b7,
-        type: 2}
+      objectReference: {fileID: 4300000, guid: 257134eb53c29c543aa9b623f59d70e6, type: 3}
     - target: {fileID: 3408920558196719045, guid: b71d654e4da96480ab3e389bdaaf71fc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
