@@ -44,6 +44,7 @@ namespace Project
                 else
                     _signalBus.Fire<DesirableIngredientAddedSignal>();
             }
+            Destroy(other.gameObject);
         }
 
         //----------------------------------------details----------------------------------------
