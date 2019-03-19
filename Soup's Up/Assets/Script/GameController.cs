@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,8 @@ namespace Project
         [Inject] SignalBus _signalBus;
         [Inject] PotController _potController;
         [Inject] List<Recipe> _recipes;
+        [Inject(Id = "allIngredients")] List<GameObject> _allIngredients;
+        [Inject] List<IngredientController.Pool> ingredientPools_;
         [SerializeField] Transform _spawnPosition;
         [SerializeField] float _spawnDelayPerItem;
 
@@ -20,6 +23,7 @@ namespace Project
         {
             setupSignalListeners();
             _recipesQueue = new Queue<Recipe>(_recipes);
+            setIngredientPools();
             setCurrentRecipe();
         }
 
@@ -31,16 +35,36 @@ namespace Project
         //----------------------------------------signals----------------------------------------
         void setupSignalListeners()
         {
+            _signalBus.Subscribe<IngredientAddedSignal>(onIngredientAddedSignal);
             _signalBus.Subscribe<RecipeCompletedSignal>(setCurrentRecipe);
         }
 
         void removeSignalListeners()
         {
+            _signalBus.TryUnsubscribe<IngredientAddedSignal>(onIngredientAddedSignal);
             _signalBus.TryUnsubscribe<RecipeCompletedSignal>(setCurrentRecipe);
+        }
+
+        void onIngredientAddedSignal(IngredientAddedSignal args)
+        {
+            StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
+        }
+
+        IEnumerator despawnIngredientCtrlWithDelay(IngredientController ingredientController)
+        {
+            yield return new WaitForSeconds(4.0f);
+            _ingredientPools[ingredientController.name.RemoveCloneSuffix()].Despawn(ingredientController);
         }
 
         //----------------------------------------details----------------------------------------
         Queue<Recipe> _recipesQueue;
+        Dictionary<string, IngredientController.Pool> _ingredientPools = new Dictionary<string, IngredientController.Pool>();
+
+        void setIngredientPools()
+        {
+            for (int i = 0; i < _allIngredients.Count; i++)
+                _ingredientPools.Add(_allIngredients[i].GetComponent<IngredientController>().name, ingredientPools_[i]);
+        }
 
         void setCurrentRecipe()
         {
@@ -50,12 +74,12 @@ namespace Project
             _recipesQueue.Enqueue(recipe);
         }
 
-        IEnumerator spawnIngredients(List<Ingredient> ingredients)
+        IEnumerator spawnIngredients(List<IngredientController> ingredients)
         {
             yield return new WaitForSeconds(2.0f);
-            foreach (var i in ingredients)
+            foreach (var ingredientCrtl in ingredients)
             {
-                var ingredientCtrl = Instantiate(i.Model, _spawnPosition).GetComponent<IngredientController>();
+                var ingredientCtrl = _ingredientPools[ingredientCrtl.name].Spawn(_spawnPosition.position);
                 ingredientCtrl.BounceUp();
                 yield return new WaitForSeconds(_spawnDelayPerItem);
             }

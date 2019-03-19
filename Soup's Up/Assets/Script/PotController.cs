@@ -17,8 +17,9 @@ namespace Project
             set
             {
                 _recipe = value;
-                _remainingIngredients = _recipe.Ingredients;
                 _addedIngredients.Clear();
+                _remainingIngredients.Clear();
+                _remainingIngredients.AddRange(_recipe.Ingredients);
             }
         }
 
@@ -27,8 +28,11 @@ namespace Project
         {
             if (other.CompareTag("Ingredient"))
             {
-                Ingredient addedIngredient = other.GetComponent<IngredientController>().Ingredient;
-                Ingredient desirableIngredient = _remainingIngredients.FirstOrDefault(i => i.name == addedIngredient.name);
+                IngredientController addedIngredient = other.GetComponent<IngredientController>();
+                _ingredientAddedSignal.IngredientController = addedIngredient;
+                _signalBus.Fire(_ingredientAddedSignal);
+                var temp = addedIngredient.name.RemoveCloneSuffix();
+                IngredientController desirableIngredient = _remainingIngredients.FirstOrDefault(i => i.name == addedIngredient.name.RemoveCloneSuffix());
 
                 if (desirableIngredient == null)
                 {
@@ -46,9 +50,13 @@ namespace Project
             }
         }
 
+        //----------------------------------------signals----------------------------------------
+        IngredientAddedSignal _ingredientAddedSignal = new IngredientAddedSignal();
+
         //----------------------------------------details----------------------------------------
         Recipe _recipe;
-        List<Ingredient> _remainingIngredients = new List<Ingredient>();
-        List<Ingredient> _addedIngredients = new List<Ingredient>();
+        List<IngredientController> _remainingIngredients = new List<IngredientController>();
+        List<IngredientController> _addedIngredients = new List<IngredientController>();
     }
+
 }

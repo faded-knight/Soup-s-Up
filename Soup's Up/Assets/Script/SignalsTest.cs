@@ -18,6 +18,7 @@ namespace Project
         void setupSignalListeners()
         {
             _signalBus.Subscribe<DesirableIngredientAddedSignal>((DesirableIngredientAddedSignal signal) => print(signal.ToString()));
+            _signalBus.Subscribe<IngredientAddedSignal>((IngredientAddedSignal signal) => print(signal.ToString()));
             _signalBus.Subscribe<RecipeCompletedSignal>((RecipeCompletedSignal signal) => print(signal.ToString()));
             _signalBus.Subscribe<UndesirableIngredientAddedSignal>((UndesirableIngredientAddedSignal signal) => print(signal.ToString()));
         }

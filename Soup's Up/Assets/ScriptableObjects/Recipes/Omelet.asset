@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Omelet
   m_EditorClassIdentifier: 
   Ingredients:
-  - {fileID: 11400000, guid: 4a318ec9e0ebd4bbfb7f3816251459ee, type: 2}
-  - {fileID: 11400000, guid: 097c02da9bedf4581bf16f5c1c1bd020, type: 2}
-  - {fileID: 11400000, guid: 3bae0dfc3583e44c8ab1f1c787cef67c, type: 2}
+  - {fileID: 4390808153297328088, guid: 1f20e348c9c88498282acad88382637a, type: 3}
+  - {fileID: 7699113944974653055, guid: 1c53abb8acf69407aa14753f978f8c45, type: 3}
+  - {fileID: 4995678391839122848, guid: 17977a07aad1a4e99af604fa16b0f11e, type: 3}

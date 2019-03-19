@@ -11,8 +11,6 @@ namespace Project
         [Inject] IngretientSettings _settings;
 
         //-----------------------------------------API------------------------------------------
-        public Ingredient Ingredient;
-
         public void OnPointerClick(PointerEventData eventData)
         {
             _rigidbody.AddForce(bounceForce, ForceMode.VelocityChange);
@@ -38,7 +36,19 @@ namespace Project
                 _rigidbody.velocity = Vector3.Scale(_rigidbody.velocity, new Vector3(1.0f, 0.85f, 1.0f));
             }
         }
+        //------------------------------------memory pool------------------------------------
+        public class Pool : MonoMemoryPool<Vector3, IngredientController>
+        {
+            protected override void Reinitialize(Vector3 position, IngredientController ingredientController)
+            {
+                ingredientController.Reset(position);
+            }
+        }
 
+        void Reset(Vector3 position)
+        {
+            transform.position = position;
+        }
         //----------------------------------------details----------------------------------------
         Rigidbody _rigidbody;
 
@@ -58,7 +68,8 @@ namespace Project
             get { return _rigidbody.velocity.y < 0; }
         }
 
-        bool isMovingFast{
+        bool isMovingFast
+        {
             get { return _rigidbody.velocity.sqrMagnitude > _settings.MaxFallingSpeed; }
         }
     }

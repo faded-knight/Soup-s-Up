@@ -5,10 +5,11 @@ namespace Project
 {
     public class SignalsInstaller : MonoInstaller
     {
-        
+
         public override void InstallBindings()
         {
             Container.DeclareSignal<DesirableIngredientAddedSignal>();
+            Container.DeclareSignal<IngredientAddedSignal>();
             Container.DeclareSignal<RecipeCompletedSignal>();
             Container.DeclareSignal<UndesirableIngredientAddedSignal>();
         }

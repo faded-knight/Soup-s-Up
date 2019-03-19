@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MagicSoup
   m_EditorClassIdentifier: 
   Ingredients:
-  - {fileID: 11400000, guid: ef52ab06a9fce437e94c9b57f93b1ea1, type: 2}
-  - {fileID: 11400000, guid: 57915cee21e3b43c1bad1e1e145842b7, type: 2}
-  - {fileID: 11400000, guid: 1c3f54dbfbf26415b93d03490ab79dc1, type: 2}
-  - {fileID: 11400000, guid: 097c02da9bedf4581bf16f5c1c1bd020, type: 2}
+  - {fileID: 8855634135318582719, guid: 0fc8d9213feb7ef409486d8402d4569f, type: 3}
+  - {fileID: 2830893991626468072, guid: 22c562ea75fda41f791aed4391f5fd1f, type: 3}
+  - {fileID: 465691168393338473, guid: 48450d6088521437ea33f9a56f8a2044, type: 3}
+  - {fileID: 7699113944974653055, guid: 1c53abb8acf69407aa14753f978f8c45, type: 3}

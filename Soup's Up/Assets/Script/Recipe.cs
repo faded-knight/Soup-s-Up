@@ -7,6 +7,6 @@ namespace Project
     [CreateAssetMenu(fileName = "RecipeName", menuName = "Custom/Recipe")]
     public class Recipe : ScriptableObject
     {
-        public List<Ingredient> Ingredients;
+        public List<IngredientController> Ingredients;
     }
 }
