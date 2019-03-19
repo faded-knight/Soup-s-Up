@@ -12,6 +12,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Capsicum
       objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719044, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: cb59466ef337857419fb28b6e675ab71, type: 3}
+    - target: {fileID: 3408920558196719045, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79705236904269c4baec4b02b4ac3adf, type: 2}
     - target: {fileID: 3408920558196719046, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,10 +82,5 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300000, guid: cb59466ef337857419fb28b6e675ab71, type: 3}
-    - target: {fileID: 3408920558196719045, guid: 0610c61f4da9242abb47646d471a5968,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 79705236904269c4baec4b02b4ac3adf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0610c61f4da9242abb47646d471a5968, type: 3}
