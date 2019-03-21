@@ -10,6 +10,7 @@ namespace Project
         {
             Container.DeclareSignal<DesirableIngredientAddedSignal>();
             Container.DeclareSignal<IngredientAddedSignal>();
+            Container.DeclareSignal<IngredientTouchedSignal>();
             Container.DeclareSignal<RecipeCompletedSignal>();
             Container.DeclareSignal<UndesirableIngredientAddedSignal>();
         }

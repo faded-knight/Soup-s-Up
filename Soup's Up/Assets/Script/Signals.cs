@@ -5,6 +5,10 @@
     {
         public IngredientController IngredientController;
     }
+    public class IngredientTouchedSignal
+    {
+        public IngredientController IngredientController;
+    }
     public class RecipeCompletedSignal { }
     public class UndesirableIngredientAddedSignal { }
 }

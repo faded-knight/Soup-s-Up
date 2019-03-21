@@ -4,7 +4,7 @@
 
 namespace Project
 {
-    [CreateAssetMenuAttribute(fileName = "DefaultIngredientSettings", menuName =  "Custom/IngredientSettings", order = 1)]
+    [CreateAssetMenuAttribute(fileName = "DefaultIngredientSettings", menuName = "Custom/IngredientSettings", order = 1)]
     public class IngretientSettings : ScriptableObject
     {
         [Range(1, 10)]
@@ -13,6 +13,7 @@ namespace Project
         public float BouncingAngle;
         [Range(1, 10)]
         public float MaxFallingSpeed;
-
+        [Range(1, 10)]
+        public float SwipeForce;
     }
 }

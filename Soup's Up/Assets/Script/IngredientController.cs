@@ -5,9 +5,10 @@ using Zenject;
 #pragma warning disable 0649, 0414
 namespace Project
 {
-    public class IngredientController : MonoBehaviour, IPointerClickHandler
+    public class IngredientController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
     {
         //------------------------------------dependencies------------------------------------
+        [Inject] SignalBus _signalBus;
         [Inject] IngretientSettings _settings;
 
         //-----------------------------------------API------------------------------------------
@@ -16,15 +17,35 @@ namespace Project
             _rigidbody.AddForce(bounceForce, ForceMode.VelocityChange);
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            _signalBus.Fire(_ingredientTouchedSignal);
+        }
+
         public void BounceUp()
         {
             _rigidbody.AddForce(bounceForce, ForceMode.VelocityChange);
+        }
+
+        public void SwipeBounce(Vector2 swipe)
+        {
+            _rigidbody.AddForce(getSwipeBounceForce(swipe), ForceMode.VelocityChange);
         }
 
         //----------------------------------Unity Messages----------------------------------
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        void OnEnable()
+        {
+            setupSignalListeners();
+        }
+
+        void OnDisable()
+        {
+            removeSignalListeners();
         }
 
         void FixedUpdate()
@@ -36,6 +57,20 @@ namespace Project
                 _rigidbody.velocity = Vector3.Scale(_rigidbody.velocity, new Vector3(1.0f, 0.85f, 1.0f));
             }
         }
+
+        //----------------------------------------signals----------------------------------------
+        IngredientTouchedSignal _ingredientTouchedSignal = new IngredientTouchedSignal();
+
+        void setupSignalListeners()
+        {
+            _ingredientTouchedSignal.IngredientController = this;
+        }
+
+        void removeSignalListeners()
+        {
+
+        }
+
         //------------------------------------memory pool------------------------------------
         public class Pool : MonoMemoryPool<Vector3, IngredientController>
         {
@@ -61,6 +96,13 @@ namespace Project
                 result.x = Random.Range(-_settings.BouncingAngle, _settings.BouncingAngle);
                 return result;
             }
+        }
+
+        Vector3 getSwipeBounceForce(Vector2 swipe)
+        {
+            Vector3 result = Vector3.zero;
+            result = _settings.SwipeForce * swipe.normalized;
+            return result;
         }
 
         bool isFalling

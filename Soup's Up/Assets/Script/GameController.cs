@@ -35,30 +35,39 @@ namespace Project
         //----------------------------------------signals----------------------------------------
         void setupSignalListeners()
         {
-            _signalBus.Subscribe<IngredientAddedSignal>(onIngredientAddedSignal);
+            _signalBus.Subscribe<IngredientAddedSignal>(onIngredientAdded);
+            _signalBus.Subscribe<IngredientTouchedSignal>(onIngredientTouched);
             _signalBus.Subscribe<RecipeCompletedSignal>(setCurrentRecipe);
+            Lean.Touch.LeanTouch.OnFingerSwipe += onFingerSwiped;
         }
 
         void removeSignalListeners()
         {
-            _signalBus.TryUnsubscribe<IngredientAddedSignal>(onIngredientAddedSignal);
+            _signalBus.TryUnsubscribe<IngredientAddedSignal>(onIngredientAdded);
+            _signalBus.TryUnsubscribe<IngredientTouchedSignal>(onIngredientTouched);
             _signalBus.TryUnsubscribe<RecipeCompletedSignal>(setCurrentRecipe);
+            Lean.Touch.LeanTouch.OnFingerSwipe -= onFingerSwiped;
         }
 
-        void onIngredientAddedSignal(IngredientAddedSignal args)
+        void onIngredientAdded(IngredientAddedSignal args)
         {
             StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
         }
 
-        IEnumerator despawnIngredientCtrlWithDelay(IngredientController ingredientController)
+        void onIngredientTouched(IngredientTouchedSignal args)
         {
-            yield return new WaitForSeconds(4.0f);
-            _ingredientPools[ingredientController.name.RemoveCloneSuffix()].Despawn(ingredientController);
+            _selectedIngredientController = args.IngredientController;
+        }
+
+        void onFingerSwiped(Lean.Touch.LeanFinger finger)
+        {
+            _selectedIngredientController.SwipeBounce(finger.SwipeScaledDelta);
         }
 
         //----------------------------------------details----------------------------------------
         Queue<Recipe> _recipesQueue;
         Dictionary<string, IngredientController.Pool> _ingredientPools = new Dictionary<string, IngredientController.Pool>();
+        IngredientController _selectedIngredientController;
 
         void setIngredientPools()
         {
@@ -83,6 +92,12 @@ namespace Project
                 ingredientCtrl.BounceUp();
                 yield return new WaitForSeconds(_spawnDelayPerItem);
             }
+        }
+
+        IEnumerator despawnIngredientCtrlWithDelay(IngredientController ingredientController)
+        {
+            yield return new WaitForSeconds(4.0f);
+            _ingredientPools[ingredientController.name.RemoveCloneSuffix()].Despawn(ingredientController);
         }
     }
 }
