@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpwardForce: 4
   BouncingAngle: 4
+  InitialBouncingForce: 0.097
   MaxFallingSpeed: 4
   SwipeForce: 4

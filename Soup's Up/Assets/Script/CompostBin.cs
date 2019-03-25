@@ -1,29 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class CompostBin : MonoBehaviour
+namespace Project
 {
-    // Start is called before the first frame update
-    void Start()
+public class CompostBin : MonoBehaviour
     {
-        
-    }
+        //------------------------------------dependencies------------------------------------
+        [Inject] SignalBus _signalBus;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //Destroys Ingredient on Entry
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Ingredient"))
+        void Start()
         {
-            Destroy(other.gameObject);
+            _ingredientTrashedSignal = new IngredientTrashedSignal();
+        }
 
-            Debug.Log(other.gameObject.name + "Trashed");
+        IngredientTrashedSignal _ingredientTrashedSignal;
+
+        //Destroys Ingredient on Entry
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Ingredient"))
+            {
+                _ingredientTrashedSignal.IngredientController = other.GetComponent<IngredientController>();
+                _signalBus.Fire(_ingredientTrashedSignal);
+            }
         }
     }
 }
+

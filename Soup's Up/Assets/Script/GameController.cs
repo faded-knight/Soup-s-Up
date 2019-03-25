@@ -17,6 +17,7 @@ namespace Project
         [Inject] List<IngredientController.Pool> ingredientPools_;
         [SerializeField] Transform _spawnPosition;
         [SerializeField] float _spawnDelayPerItem;
+        [SerializeField] List<SpriteRenderer> _spriteRenderers;
 
         //----------------------------------Unity Messages----------------------------------
         void Start()
@@ -25,6 +26,7 @@ namespace Project
             _recipesQueue = new Queue<Recipe>(_recipes);
             setIngredientPools();
             setCurrentRecipe();
+            StartCoroutine(nameof(spawnIngredients));
         }
 
         void OnDestroy()
@@ -37,6 +39,7 @@ namespace Project
         {
             _signalBus.Subscribe<IngredientAddedSignal>(onIngredientAdded);
             _signalBus.Subscribe<IngredientTouchedSignal>(onIngredientTouched);
+            _signalBus.Subscribe<IngredientTrashedSignal>(onIngredientTrashedSignal);
             _signalBus.Subscribe<RecipeCompletedSignal>(setCurrentRecipe);
             Lean.Touch.LeanTouch.OnFingerSwipe += onFingerSwiped;
         }
@@ -45,11 +48,17 @@ namespace Project
         {
             _signalBus.TryUnsubscribe<IngredientAddedSignal>(onIngredientAdded);
             _signalBus.TryUnsubscribe<IngredientTouchedSignal>(onIngredientTouched);
+            _signalBus.TryUnsubscribe<IngredientTrashedSignal>(onIngredientTrashedSignal);
             _signalBus.TryUnsubscribe<RecipeCompletedSignal>(setCurrentRecipe);
             Lean.Touch.LeanTouch.OnFingerSwipe -= onFingerSwiped;
         }
 
         void onIngredientAdded(IngredientAddedSignal args)
+        {
+            StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
+        }
+
+        void onIngredientTrashedSignal(IngredientTrashedSignal args)
         {
             StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
         }
@@ -61,7 +70,7 @@ namespace Project
 
         void onFingerSwiped(Lean.Touch.LeanFinger finger)
         {
-            _selectedIngredientController.SwipeBounce(finger.SwipeScaledDelta);
+            _selectedIngredientController?.SwipeBounce(finger.SwipeScaledDelta);
         }
 
         //----------------------------------------details----------------------------------------
@@ -79,18 +88,30 @@ namespace Project
         {
             Recipe recipe = _recipesQueue.Dequeue();
             _potController.Recipe = recipe;
-            StartCoroutine(nameof(spawnIngredients), recipe.Ingredients);
+
+            for (int i = 0; i < _spriteRenderers.Count; i++)
+            {
+                _spriteRenderers[i].sprite = null;
+                if (i >= recipe.Ingredients.Count)
+                    break;
+                _spriteRenderers[i].sprite = recipe.Ingredients[i].Sprite;
+            }
+
             _recipesQueue.Enqueue(recipe);
         }
 
-        IEnumerator spawnIngredients(List<IngredientController> ingredients)
+        IEnumerator spawnIngredients()
         {
             yield return new WaitForSeconds(2.0f);
-            foreach (var ingredientCrtl in ingredients)
+            while (true)
             {
-                var ingredientCtrl = _ingredientPools[ingredientCrtl.name].Spawn(_spawnPosition.position);
-                ingredientCtrl.BounceUp();
-                yield return new WaitForSeconds(_spawnDelayPerItem);
+                for (int i = 0; i < _allIngredients.Count; i++)
+                {
+                    var ingredientCtrl = _ingredientPools.ElementAt(i).Value.Spawn(_spawnPosition.position);
+                    ingredientCtrl.InitialBounce();
+
+                    yield return new WaitForSeconds(_spawnDelayPerItem);
+                }
             }
         }
 

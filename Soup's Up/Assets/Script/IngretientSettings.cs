@@ -11,6 +11,8 @@ namespace Project
         public float UpwardForce;
         [Range(1, 10)]
         public float BouncingAngle;
+        [Range(0, 1)]
+        public float InitialBouncingForce;
         [Range(1, 10)]
         public float MaxFallingSpeed;
         [Range(1, 10)]

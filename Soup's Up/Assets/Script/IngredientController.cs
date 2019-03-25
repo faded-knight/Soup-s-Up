@@ -12,6 +12,8 @@ namespace Project
         [Inject] IngretientSettings _settings;
 
         //-----------------------------------------API------------------------------------------
+        public Sprite Sprite;
+
         public void OnPointerClick(PointerEventData eventData)
         {
             _rigidbody.AddForce(bounceForce, ForceMode.VelocityChange);
@@ -22,9 +24,9 @@ namespace Project
             _signalBus.Fire(_ingredientTouchedSignal);
         }
 
-        public void BounceUp()
+        public void InitialBounce()
         {
-            _rigidbody.AddForce(bounceForce, ForceMode.VelocityChange);
+            _rigidbody.AddForce(initialBounceForce, ForceMode.VelocityChange);
         }
 
         public void SwipeBounce(Vector2 swipe)
@@ -86,6 +88,16 @@ namespace Project
         }
         //----------------------------------------details----------------------------------------
         Rigidbody _rigidbody;
+
+        Vector3 initialBounceForce
+        {
+            get
+            {
+                Vector3 result = Vector3.zero;
+                result.x = Random.Range(-_settings.InitialBouncingForce, _settings.BouncingAngle);
+                return result;
+            }
+        }
 
         Vector3 bounceForce
         {

@@ -9,6 +9,10 @@
     {
         public IngredientController IngredientController;
     }
+    public class IngredientTrashedSignal
+    {
+        public IngredientController IngredientController;
+    }
     public class RecipeCompletedSignal { }
     public class UndesirableIngredientAddedSignal { }
 }

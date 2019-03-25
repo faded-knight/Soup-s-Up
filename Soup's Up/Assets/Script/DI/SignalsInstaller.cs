@@ -9,8 +9,9 @@ namespace Project
         public override void InstallBindings()
         {
             Container.DeclareSignal<DesirableIngredientAddedSignal>();
-            Container.DeclareSignal<IngredientAddedSignal>();
+            Container.DeclareSignal<IngredientAddedSignal>(); 
             Container.DeclareSignal<IngredientTouchedSignal>();
+            Container.DeclareSignal<IngredientTrashedSignal>();
             Container.DeclareSignal<RecipeCompletedSignal>();
             Container.DeclareSignal<UndesirableIngredientAddedSignal>();
         }
