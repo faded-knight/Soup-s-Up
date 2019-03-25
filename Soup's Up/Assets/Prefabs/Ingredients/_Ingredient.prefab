@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3408920558196719044}
   - component: {fileID: 3408920558196719047}
   - component: {fileID: 3408920558196718907}
+  - component: {fileID: 1211709778115581020}
   m_Layer: 9
   m_Name: _Ingredient
   m_TagString: Ingredient
@@ -123,3 +124,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sprite: {fileID: 0}
+--- !u!135 &1211709778115581020
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408920558196719041}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
