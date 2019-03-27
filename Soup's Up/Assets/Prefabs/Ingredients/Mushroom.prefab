@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom
       objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719044, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 90d4141709e805446a611003639cbb68, type: 3}
     - target: {fileID: 3408920558196719045, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

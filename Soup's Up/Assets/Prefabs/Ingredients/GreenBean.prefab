@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenBean
       objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719044, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3816035422516406121, guid: d3557081feea3b24d94aa188b9d203c7,
+        type: 3}
     - target: {fileID: 3408920558196719045, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
