@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e89cfab2f53de4b2aaa8962472656d30, type: 3}
-  m_Name: Omelet
+  m_Name: BaconAndVegSoup
   m_EditorClassIdentifier: 
   Ingredients:
-  - {fileID: 3410160174467864200, guid: 4f674422ed0e04fe49182ad27a111281, type: 3}
-  - {fileID: 3410160174467864200, guid: 4f674422ed0e04fe49182ad27a111281, type: 3}
-  - {fileID: 3410160174467864200, guid: 4f674422ed0e04fe49182ad27a111281, type: 3}
+  - {fileID: 6462380912428358130, guid: dd70df614ef024bee8079a11e8610389, type: 3}
+  - {fileID: 2127072483697382412, guid: 9d300ab743ed44621b2cedb93b3625ca, type: 3}
+  - {fileID: 4068405566512698618, guid: c37609c7e148244ebb4b4d56e1c1bb78, type: 3}
+  - {fileID: 7837266292591436862, guid: c6c4ebcd1e5a44ba5bf5a6105efc112b, type: 3}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89cfab2f53de4b2aaa8962472656d30, type: 3}
+  m_Name: PotatoAndCheeseSoup
+  m_EditorClassIdentifier: 
+  Ingredients:
+  - {fileID: 7837266292591436862, guid: c6c4ebcd1e5a44ba5bf5a6105efc112b, type: 3}
+  - {fileID: 9045826696902498176, guid: a091db74c2046444fb26f1966169de62, type: 3}
+  - {fileID: 411761772643799155, guid: 5aa8d62c05a494bc9a00af0556aff039, type: 3}
+  - {fileID: 6462380912428358130, guid: dd70df614ef024bee8079a11e8610389, type: 3}
