@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8631797590036858343
+--- !u!1001 &6003708948726218368
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,18 +10,13 @@ PrefabInstance:
     - target: {fileID: 3408920558196719041, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_Name
-      value: Fetta
+      value: BowPasta
       objectReference: {fileID: 0}
-    - target: {fileID: 3408920558196719044, guid: 0610c61f4da9242abb47646d471a5968,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: c70ca64ed0721944cb6d2d989e430dbd, type: 3}
     - target: {fileID: 3408920558196719045, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 42b7f5c95ed9b0142a0b9e96039ee2fd, type: 2}
+      objectReference: {fileID: 2100000, guid: 21d1bbf36a2f4d74baf26f15954280e9, type: 2}
     - target: {fileID: 3408920558196719046, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,16 +72,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719046, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719046, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408920558196719046, guid: 0610c61f4da9242abb47646d471a5968,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.006
+      objectReference: {fileID: 0}
     - target: {fileID: 3408920558196718906, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300000, guid: c70ca64ed0721944cb6d2d989e430dbd, type: 3}
-    - target: {fileID: 3408920558196718907, guid: 0610c61f4da9242abb47646d471a5968,
-        type: 3}
-      propertyPath: Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c6597392690035949b55a00bd4443471,
+      objectReference: {fileID: 4991341068320391854, guid: 093b2ecae988aa0418069de345446e92,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0610c61f4da9242abb47646d471a5968, type: 3}

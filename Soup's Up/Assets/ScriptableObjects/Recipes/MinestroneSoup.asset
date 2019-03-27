@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e89cfab2f53de4b2aaa8962472656d30, type: 3}
-  m_Name: TomatoSoup
+  m_Name: MinestroneSoup
   m_EditorClassIdentifier: 
   Ingredients:
-  - {fileID: 8557307963222417855, guid: 3f8e738052bdf4d38985b94f648f937b, type: 3}
-  - {fileID: 6613624910144420668, guid: 585868c6be6484d1daf4af24bef4b0bd, type: 3}
-  - {fileID: 2455842795318471671, guid: 830618ab9f56be248b122995f00143c2, type: 3}
+  - {fileID: 2127072483697382412, guid: 9d300ab743ed44621b2cedb93b3625ca, type: 3}
+  - {fileID: 4068405566512698618, guid: c37609c7e148244ebb4b4d56e1c1bb78, type: 3}
+  - {fileID: 8944041474727576507, guid: aaff21ad44519234ab04f1aa74d24d39, type: 3}
+  - {fileID: 411761772643799155, guid: 5aa8d62c05a494bc9a00af0556aff039, type: 3}

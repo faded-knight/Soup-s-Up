@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e89cfab2f53de4b2aaa8962472656d30, type: 3}
-  m_Name: TomatoSoup
+  m_Name: SweetCornSoup
   m_EditorClassIdentifier: 
   Ingredients:
-  - {fileID: 8557307963222417855, guid: 3f8e738052bdf4d38985b94f648f937b, type: 3}
-  - {fileID: 6613624910144420668, guid: 585868c6be6484d1daf4af24bef4b0bd, type: 3}
-  - {fileID: 2455842795318471671, guid: 830618ab9f56be248b122995f00143c2, type: 3}
+  - {fileID: 128461065428625525, guid: 0c87d484922c592498c4bcf3974d1828, type: 3}
+  - {fileID: 7507502273406827354, guid: 3377572f544c144738f810055673d668, type: 3}
+  - {fileID: 411761772643799155, guid: 5aa8d62c05a494bc9a00af0556aff039, type: 3}
