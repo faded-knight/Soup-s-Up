@@ -139,15 +139,19 @@ namespace Project
             yield return new WaitForSeconds(2.0f);
             while (true)
             {
-                for (int i = 0; i < _allIngredients.Count; i++)
+                _shuffledAllIngredients.Clear();
+                _shuffledAllIngredients.AddRange(_allIngredients.OrderBy(i => System.Guid.NewGuid()).Select(i => i.name)) ;
+
+                for (int i = 0; i < _shuffledAllIngredients.Count; i++)
                 {
-                    var ingredientCtrl = _ingredientPools.ElementAt(i).Value.Spawn(_spawnPosition.position);
+                    var ingredientCtrl = _ingredientPools[_shuffledAllIngredients[i]].Spawn(_spawnPosition.position);
                     ingredientCtrl.InitialBounce();
 
                     yield return new WaitForSeconds(_spawnDelayPerItem);
                 }
             }
         }
+        List<string> _shuffledAllIngredients = new List<string>();
 
         IEnumerator despawnIngredientCtrlWithDelay(IngredientController ingredientController)
         {
