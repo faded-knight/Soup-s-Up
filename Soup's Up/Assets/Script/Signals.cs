@@ -2,8 +2,9 @@
 {
     public class DesirableIngredientAddedSignal
     {
-        internal IngredientController IngredientController;
+        public IngredientController IngredientController;
     }
+    public class GameIsOver { }
     public class IngredientAddedSignal
     {
         public IngredientController IngredientController;

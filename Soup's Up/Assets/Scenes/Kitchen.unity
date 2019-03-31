@@ -2982,6 +2982,10 @@ MonoBehaviour:
   _spawnPosition: {fileID: 1798421719}
   _spawnDelayPerItem: 2
   _currentScoreUI: {fileID: 1816242690}
+  _livesUI:
+  - {fileID: 74137601}
+  - {fileID: 1514060842}
+  - {fileID: 1078038667}
 --- !u!4 &1260529975
 Transform:
   m_ObjectHideFlags: 0
