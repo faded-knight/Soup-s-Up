@@ -86,6 +86,7 @@ namespace Project
         {
             if (_lives == 0){
                 _signalBus.Fire<GameIsOver>();
+                StopCoroutine(nameof(spawnIngredients));
                 return;
             }
 
