@@ -26,12 +26,11 @@ namespace Project
         //----------------------------------Unity Messages----------------------------------
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Ingredient"))
+            if (other.CompareTag("Ingredient") && other.GetType() == typeof(MeshCollider))
             {
                 IngredientController addedIngredient = other.GetComponent<IngredientController>();
                 _ingredientAddedSignal.IngredientController = addedIngredient;
                 _signalBus.Fire(_ingredientAddedSignal);
-                var temp = addedIngredient.name.RemoveCloneSuffix();
                 IngredientController desirableIngredient = _remainingIngredients.FirstOrDefault(i => i.name == addedIngredient.name.RemoveCloneSuffix());
 
                 if (desirableIngredient == null)
@@ -49,12 +48,16 @@ namespace Project
                     _signalBus.Fire(_recipeCompletedSignal);
                 }
                 else
-                    _signalBus.Fire<DesirableIngredientAddedSignal>();
+                {
+                    _desirableIngredientAddedSignal.IngredientController = addedIngredient;
+                    _signalBus.Fire(_desirableIngredientAddedSignal);
+                }
             }
         }
 
         //----------------------------------------signals----------------------------------------
         IngredientAddedSignal _ingredientAddedSignal = new IngredientAddedSignal();
+        DesirableIngredientAddedSignal _desirableIngredientAddedSignal = new DesirableIngredientAddedSignal();
         RecipeCompletedSignal _recipeCompletedSignal = new RecipeCompletedSignal();
 
         //----------------------------------------details----------------------------------------

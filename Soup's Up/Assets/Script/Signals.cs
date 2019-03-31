@@ -1,6 +1,9 @@
 ﻿namespace Project
 {
-    public class DesirableIngredientAddedSignal { }
+    public class DesirableIngredientAddedSignal
+    {
+        internal IngredientController IngredientController;
+    }
     public class IngredientAddedSignal
     {
         public IngredientController IngredientController;
@@ -13,7 +16,7 @@
     {
         public IngredientController IngredientController;
     }
-    public class RecipeCompletedSignal 
+    public class RecipeCompletedSignal
     {
         public Recipe Recipe;
     }

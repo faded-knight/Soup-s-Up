@@ -13,12 +13,12 @@ namespace Project
         //------------------------------------dependencies------------------------------------
         [Inject] SignalBus _signalBus;
         [Inject] PotController _potController;
+        [Inject] RecipeUIController _recipeUIController;
         [Inject] List<Recipe> _recipes;
         [Inject(Id = "allIngredients")] List<GameObject> _allIngredients;
         [Inject] List<IngredientController.Pool> ingredientPools_;
         [SerializeField] Transform _spawnPosition;
         [SerializeField] float _spawnDelayPerItem;
-        [SerializeField] List<SpriteRenderer> _spriteRenderers;
         [SerializeField] TextMeshProUGUI _currentScoreUI;
 
         //----------------------------------Unity Messages----------------------------------
@@ -44,7 +44,7 @@ namespace Project
             _signalBus.Subscribe<IngredientAddedSignal>(onIngredientAdded);
             _signalBus.Subscribe<IngredientTouchedSignal>(onIngredientTouched);
             _signalBus.Subscribe<IngredientTrashedSignal>(onIngredientTrashedSignal);
-            _signalBus.Subscribe<RecipeCompletedSignal>(onRecipeCompletedSignal);
+            _signalBus.Subscribe<RecipeCompletedSignal>(onRecipeCompleted);
             Lean.Touch.LeanTouch.OnFingerSwipe += onFingerSwiped;
         }
 
@@ -53,7 +53,7 @@ namespace Project
             _signalBus.TryUnsubscribe<IngredientAddedSignal>(onIngredientAdded);
             _signalBus.TryUnsubscribe<IngredientTouchedSignal>(onIngredientTouched);
             _signalBus.TryUnsubscribe<IngredientTrashedSignal>(onIngredientTrashedSignal);
-            _signalBus.TryUnsubscribe<RecipeCompletedSignal>(onRecipeCompletedSignal);
+            _signalBus.TryUnsubscribe<RecipeCompletedSignal>(onRecipeCompleted);
             Lean.Touch.LeanTouch.OnFingerSwipe -= onFingerSwiped;
         }
 
@@ -72,7 +72,7 @@ namespace Project
             StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
         }
 
-        void onRecipeCompletedSignal(RecipeCompletedSignal args)
+        void onRecipeCompleted(RecipeCompletedSignal args)
         {
             updateScore(args.Recipe.Points);
             setCurrentRecipe();
@@ -99,15 +99,7 @@ namespace Project
         {
             Recipe recipe = _recipesQueue.Dequeue();
             _potController.Recipe = recipe;
-
-            for (int i = 0; i < _spriteRenderers.Count; i++)
-            {
-                _spriteRenderers[i].sprite = null;
-                if (i >= recipe.Ingredients.Count)
-                    break;
-                _spriteRenderers[i].sprite = recipe.Ingredients[i].Sprite;
-            }
-
+            _recipeUIController.Recipe = recipe;
             _recipesQueue.Enqueue(recipe);
         }
 

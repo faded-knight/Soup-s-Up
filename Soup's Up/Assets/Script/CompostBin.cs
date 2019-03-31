@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+#pragma warning disable 0649, 0414
 namespace Project
 {
-public class CompostBin : MonoBehaviour
+    public class CompostBin : MonoBehaviour
     {
         //------------------------------------dependencies------------------------------------
         [Inject] SignalBus _signalBus;
@@ -20,7 +21,7 @@ public class CompostBin : MonoBehaviour
         //Destroys Ingredient on Entry
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Ingredient"))
+            if (other.CompareTag("Ingredient") && other.GetType() == typeof(MeshCollider))
             {
                 _ingredientTrashedSignal.IngredientController = other.GetComponent<IngredientController>();
                 _signalBus.Fire(_ingredientTrashedSignal);
