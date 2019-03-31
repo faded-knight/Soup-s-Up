@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -18,12 +19,15 @@ namespace Project
         [SerializeField] Transform _spawnPosition;
         [SerializeField] float _spawnDelayPerItem;
         [SerializeField] List<SpriteRenderer> _spriteRenderers;
+        [SerializeField] TextMeshProUGUI _currentScoreUI;
 
         //----------------------------------Unity Messages----------------------------------
         void Start()
         {
             setupSignalListeners();
             _recipesQueue = new Queue<Recipe>(_recipes);
+            _score = 0;
+            updateScore(0);
             setIngredientPools();
             setCurrentRecipe();
             StartCoroutine(nameof(spawnIngredients));
@@ -40,7 +44,7 @@ namespace Project
             _signalBus.Subscribe<IngredientAddedSignal>(onIngredientAdded);
             _signalBus.Subscribe<IngredientTouchedSignal>(onIngredientTouched);
             _signalBus.Subscribe<IngredientTrashedSignal>(onIngredientTrashedSignal);
-            _signalBus.Subscribe<RecipeCompletedSignal>(setCurrentRecipe);
+            _signalBus.Subscribe<RecipeCompletedSignal>(onRecipeCompletedSignal);
             Lean.Touch.LeanTouch.OnFingerSwipe += onFingerSwiped;
         }
 
@@ -49,7 +53,7 @@ namespace Project
             _signalBus.TryUnsubscribe<IngredientAddedSignal>(onIngredientAdded);
             _signalBus.TryUnsubscribe<IngredientTouchedSignal>(onIngredientTouched);
             _signalBus.TryUnsubscribe<IngredientTrashedSignal>(onIngredientTrashedSignal);
-            _signalBus.TryUnsubscribe<RecipeCompletedSignal>(setCurrentRecipe);
+            _signalBus.TryUnsubscribe<RecipeCompletedSignal>(onRecipeCompletedSignal);
             Lean.Touch.LeanTouch.OnFingerSwipe -= onFingerSwiped;
         }
 
@@ -58,14 +62,20 @@ namespace Project
             StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
         }
 
+        void onIngredientTouched(IngredientTouchedSignal args)
+        {
+            _selectedIngredientController = args.IngredientController;
+        }
+
         void onIngredientTrashedSignal(IngredientTrashedSignal args)
         {
             StartCoroutine(nameof(despawnIngredientCtrlWithDelay), args.IngredientController);
         }
 
-        void onIngredientTouched(IngredientTouchedSignal args)
+        void onRecipeCompletedSignal(RecipeCompletedSignal args)
         {
-            _selectedIngredientController = args.IngredientController;
+            updateScore(args.Recipe.Points);
+            setCurrentRecipe();
         }
 
         void onFingerSwiped(Lean.Touch.LeanFinger finger)
@@ -77,6 +87,7 @@ namespace Project
         Queue<Recipe> _recipesQueue;
         Dictionary<string, IngredientController.Pool> _ingredientPools = new Dictionary<string, IngredientController.Pool>();
         IngredientController _selectedIngredientController;
+        int _score;
 
         void setIngredientPools()
         {
@@ -98,6 +109,12 @@ namespace Project
             }
 
             _recipesQueue.Enqueue(recipe);
+        }
+
+        void updateScore(int points)
+        {
+            _score += points;
+            _currentScoreUI.text = _score.ToString();
         }
 
         IEnumerator spawnIngredients()

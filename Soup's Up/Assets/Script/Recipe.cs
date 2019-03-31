@@ -8,5 +8,6 @@ namespace Project
     public class Recipe : ScriptableObject
     {
         public List<IngredientController> Ingredients;
+        public int Points;
     }
 }

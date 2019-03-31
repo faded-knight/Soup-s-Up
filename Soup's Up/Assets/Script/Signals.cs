@@ -13,6 +13,9 @@
     {
         public IngredientController IngredientController;
     }
-    public class RecipeCompletedSignal { }
+    public class RecipeCompletedSignal 
+    {
+        public Recipe Recipe;
+    }
     public class UndesirableIngredientAddedSignal { }
 }

@@ -44,7 +44,10 @@ namespace Project
                 _addedIngredients.Add(desirableIngredient);
 
                 if (_remainingIngredients.Count == 0)
-                    _signalBus.Fire<RecipeCompletedSignal>();
+                {
+                    _recipeCompletedSignal.Recipe = _recipe;
+                    _signalBus.Fire(_recipeCompletedSignal);
+                }
                 else
                     _signalBus.Fire<DesirableIngredientAddedSignal>();
             }
@@ -52,6 +55,7 @@ namespace Project
 
         //----------------------------------------signals----------------------------------------
         IngredientAddedSignal _ingredientAddedSignal = new IngredientAddedSignal();
+        RecipeCompletedSignal _recipeCompletedSignal = new RecipeCompletedSignal();
 
         //----------------------------------------details----------------------------------------
         Recipe _recipe;
