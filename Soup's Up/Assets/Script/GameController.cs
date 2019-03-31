@@ -26,7 +26,7 @@ namespace Project
         void Start()
         {
             setupSignalListeners();
-            _recipesQueue = new Queue<Recipe>(_recipes);
+            _recipesQueue = new Queue<Recipe>(_recipes.OrderBy(r => System.Guid.NewGuid()));
             _score = 0;
             updateScore(0);
             setLives();
