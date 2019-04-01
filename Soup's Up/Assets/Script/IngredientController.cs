@@ -16,11 +16,17 @@ namespace Project
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (isUninteractable)
+                return;
+
             _rigidbody.AddForce(bounceForce, ForceMode.VelocityChange);
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (isUninteractable)
+                return;
+
             _signalBus.Fire(_ingredientTouchedSignal);
         }
 
@@ -31,6 +37,9 @@ namespace Project
 
         public void SwipeBounce(Vector2 swipe)
         {
+            if (isUninteractable)
+                return;
+
             _rigidbody.AddForce(getSwipeBounceForce(swipe), ForceMode.VelocityChange);
         }
 
@@ -43,6 +52,7 @@ namespace Project
         void OnEnable()
         {
             setupSignalListeners();
+            isUninteractable = false;
         }
 
         void OnDisable()
@@ -57,6 +67,24 @@ namespace Project
             {
                 // slow down the diving speed
                 _rigidbody.velocity = Vector3.Scale(_rigidbody.velocity, new Vector3(1.0f, 0.85f, 1.0f));
+            }
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.name == "Soup")
+            {
+                _rigidbody.drag = 6.0f;
+                isUninteractable = true;
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (other.name == "Soup")
+            {
+                _rigidbody.drag = 0.0f;
+                isUninteractable = false;
             }
         }
 
@@ -88,6 +116,7 @@ namespace Project
         }
         //----------------------------------------details----------------------------------------
         Rigidbody _rigidbody;
+        bool isUninteractable;
 
         Vector3 initialBounceForce
         {

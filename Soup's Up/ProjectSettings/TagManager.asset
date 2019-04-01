@@ -16,8 +16,8 @@ TagManager:
   - 
   - Boundary
   - Ingredient
-  - 
-  - 
+  - Chef
+  - PostProcessing
   - 
   - 
   - 
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1004789239
+    locked: 0
+  - name: Trails
+    uniqueID: 190671387
     locked: 0

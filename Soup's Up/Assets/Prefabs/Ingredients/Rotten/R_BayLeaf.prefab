@@ -4641,8 +4641,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 190671387
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 3
   m_SortMode: 0
@@ -4702,8 +4702,8 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 190671387
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Time: 1
   m_Parameters:
@@ -4781,7 +4781,7 @@ PrefabInstance:
     - target: {fileID: 3408920558196719041, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
       propertyPath: m_Name
-      value: BayLeaf
+      value: R_BayLeaf
       objectReference: {fileID: 0}
     - target: {fileID: 3408920558196719044, guid: 0610c61f4da9242abb47646d471a5968,
         type: 3}
