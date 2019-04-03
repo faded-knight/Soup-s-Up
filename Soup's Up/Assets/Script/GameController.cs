@@ -40,6 +40,21 @@ namespace Project
             removeSignalListeners();
         }
 
+        void Update()
+        {
+#if UNITY_EDITOR
+            if (Input.GetMouseButtonUp(0))
+                _selectedIngredientController = null;
+#else
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                    _selectedIngredientController = null;
+            }
+#endif
+        }
+
         //----------------------------------------signals----------------------------------------
         void setupSignalListeners()
         {
